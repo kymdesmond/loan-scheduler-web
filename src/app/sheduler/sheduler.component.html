@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <h1>Loan Scheduler Service</h1>
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <div class="form-group">
+                <label for="amount">Loan Amount</label>
+                <input type="number" class="form-control" id="amount" name="amount" [(ngModel)]="request.amount" required>
+            </div>
+            <div class="form-group">
+                <label for="frequency">Repayment Frequency</label>
+                <select class="form-control" id="frequency" name="frequency" [(ngModel)]="request.repaymentFrequency" required>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="bi-annually">Semiannually</option>
+                    <option value="annually">Annually</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="period">Period</label>
+                <input type="number" class="form-control" id="period" name="period" [(ngModel)]="request.period" required>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Select Start Date</label>
+                <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="request.startDate" required>
+            </div>
+            <div class="form-group">
+                <label for="interestType">Select Iterest Type</label>
+                <select class="form-control" id="interestType" name="interestType" [(ngModel)]="request.interestType" required>
+                    <option value="FIXED_RATE" selected>Fixed Rate</option>
+                    <option value="REDUCING_BALANCE">Reducing Balance</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br/>
+        <br/>
+        <div id="exportable" *ngIf ="charges.length > 0">
+            <table>
+                <tr>
+                    <th>Charge Type</th>
+                    <th>Charge Value</th>
+                </tr>
+                <tbody>
+                    <tr *ngFor = "let charge of charges">
+                        <td>{{charge.name}}</td>
+                        <td>{{charge.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <table *ngFor = "let bank of productSchedules">
+                <caption>{{bank.name}}</caption>
+                <tbody>
+                    <tr>
+                        <th>Installment Number</th>
+                        <th>Principal</th>
+                        <th>Beginning Balance</th>
+                        <th>Insallment Amount</th>
+                        <th>Interest</th>
+                        <th>Scheduled Payment</th>
+                        <th>Ending Balance</th>
+                        <th>Due Date</th>
+                    </tr>
+                    <tr *ngFor = "let schedule of bank.schedules">
+                        <td>{{schedule.instalmentNumber}}</td>
+                        <td>{{schedule.principal}}</td>
+                        <td>{{schedule.beginningBalance}}</td>
+                        <td>{{schedule.insallmentAmount}}</td>
+                        <td>{{schedule.interest}}</td>
+                        <td>{{schedule.scheduledPayment}}</td>
+                        <td>{{schedule.endingBalance}}</td>
+                        <td>{{schedule.dueDate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button (click)="exportAsPDF()">Export to PDF</button>
+        </div>
+    </div>
+</div>

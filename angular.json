@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -63,7 +64,11 @@
               "browserTarget": "loan-scheduler-web:build:production"
             },
             "development": {
-              "browserTarget": "loan-scheduler-web:build:development"
+              "browserTarget": "loan-scheduler-web:build:development",
+              "proxyConfig": "src/proxy.conf.json"
+            },
+            "options" :{
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -87,6 +92,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
